@@ -9,6 +9,7 @@ import {
   Res,
   HttpStatus,
   UseGuards,
+  Req,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { HomeService } from './home.service';
@@ -16,14 +17,14 @@ import { CreateHomeDto } from './dto/create-home.dto';
 import { UpdateHomeDto } from './dto/update-home.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @Controller('home')
 export class HomeController {
   constructor(private readonly homeService: HomeService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
-  create(@Body() createHomeDto: CreateHomeDto) {
-    return this.homeService.create(createHomeDto);
+  create(@Body() createHomeDto: CreateHomeDto, @Req() req: any) {
+    return this.homeService.create(createHomeDto, req.user);
   }
 
   @Get()

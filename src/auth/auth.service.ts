@@ -24,7 +24,6 @@ export class AuthService {
   async login(user: LoginDto) {
     const loggedInUser = await this.usersService.signIn(user);
     delete loggedInUser.password;
-    console.log(loggedInUser);
     return {
       access_token: this.jwtService.sign({ ...loggedInUser }),
       loggedInUser,
@@ -32,7 +31,6 @@ export class AuthService {
   }
 
   async register(c: CreateUserDto) {
-    console.log(c);
     c.password = await bcrypt.hash(c.password, 10);
     const response = await this.usersService.create(c);
     if (response) {

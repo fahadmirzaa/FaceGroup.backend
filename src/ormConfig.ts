@@ -12,7 +12,7 @@ export default new DataSource({
   migrations: ['migrations/*.ts'],
   entities: [__dirname + '/**/*.entity.ts', __dirname + '/**/*.entity.js'],
 });
-// npx typeorm-ts-node-esm migration:generate ./migrations/newDatabase -d ./src/ormConfig.ts
-// npx typeorm-ts-node-esm migration:show -d ./src/ormConfig.ts
-// npx typeorm-ts-node-esm migration:run -d ./src/ormConfig.ts
+// npx typeorm-ts-node-esm migration:generate ./migrations/newDatabase -d ./src/ormconfig.ts
+// npx typeorm-ts-node-esm migration:show -d ./src/ormconfig.ts
+// npx typeorm-ts-node-esm migration:run -d ./src/ormconfig.ts
 // npx typeorm-ts-node-esm migration:create ./src/migrations/newDatabase

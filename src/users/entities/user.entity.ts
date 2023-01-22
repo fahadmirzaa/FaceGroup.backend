@@ -1,8 +1,8 @@
+import { Post } from 'src/post/entities/post.entity';
 import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -23,4 +23,6 @@ export class User extends BaseEntity {
   createdAt: Date;
   @Column()
   Image: string;
+  @OneToMany(() => Post, (post) => post.user, { cascade: true })
+  post: Post[];
 }

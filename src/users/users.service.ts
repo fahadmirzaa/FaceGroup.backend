@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
+import { Repository } from 'typeorm';
+
+import { CreateUserDto } from './dto/create-user.dto';
+import { LoginDto } from './dto/login.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
@@ -26,6 +27,7 @@ export class UsersService {
   async signIn(user: LoginDto) {
     const activeUser = await this.userRepository.findOneOrFail({
       where: { email: user.email },
+      relations: ['post'],
     });
     if (!activeUser) {
       throw new Error('User not found');
@@ -38,7 +40,7 @@ export class UsersService {
   }
 
   findAll() {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ['post'] });
   }
   async getUser() {
     return await this.userRepository.find();

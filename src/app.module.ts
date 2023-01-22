@@ -5,9 +5,9 @@ import { AppService } from './app.service';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module'; ///
 import { AuthModule } from './auth/auth.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
-import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { HomeModule } from './home/home.module';
+import { PostModule } from './post/post.module';
+import { GroupsModule } from './groups/groups.module';
 
 const ormOptions: TypeOrmModuleOptions = {
   type: 'mysql',
@@ -24,14 +24,10 @@ const ormOptions: TypeOrmModuleOptions = {
     UsersModule,
     AuthModule,
     HomeModule,
+    PostModule,
+    GroupsModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: AuthInterceptor,
-    },
-  ],
+  providers: [AppService],
 })
 export class AppModule {}
