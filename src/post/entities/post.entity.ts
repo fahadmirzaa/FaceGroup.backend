@@ -21,6 +21,6 @@ export class Post extends BaseEntity {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   createdAt: Date;
-  @ManyToOne(() => User, (user) => user.post)
+  @ManyToOne(() => User, (user) => user.email)
   user: User;
 }
